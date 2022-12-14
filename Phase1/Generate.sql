@@ -1,6 +1,6 @@
 use company;
 
---department
+-- department
 LOAD DATA LOCAL INFILE 'D:/DB_fillers/department.csv' INTO TABLE department
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
@@ -9,7 +9,7 @@ LINES TERMINATED BY '\r\n'
 select count(*) from department;
 select * from department;
 
---employee
+-- employee
 LOAD DATA LOCAL INFILE 'D:/DB_fillers/employee.csv' INTO TABLE employee
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
@@ -18,7 +18,7 @@ LINES TERMINATED BY '\r\n'
 select count(*) from employee;
 select * from employee;
 
---manages
+-- manages
 LOAD DATA LOCAL INFILE 'D:/DB_fillers/manages.csv' INTO TABLE manages
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
@@ -27,7 +27,7 @@ LINES TERMINATED BY '\r\n'
 select count(*) from manages;
 select * from manages;
 
---project
+-- project
 LOAD DATA LOCAL INFILE 'D:/DB_fillers/project.csv' INTO TABLE project
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
@@ -36,7 +36,7 @@ LINES TERMINATED BY '\r\n'
 select count(*) from project;
 select * from project;
 
---works_on
+-- works_on
 LOAD DATA LOCAL INFILE 'D:/DB_fillers/works_on.csv' INTO TABLE works_on
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
@@ -45,7 +45,7 @@ LINES TERMINATED BY '\r\n'
 select count(*) from works_on;
 select * from works_on;
 
---dependent
+-- dependent
 LOAD DATA LOCAL INFILE 'D:/DB_fillers/dependent.csv' INTO TABLE dependent
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
@@ -54,7 +54,7 @@ LINES TERMINATED BY '\r\n'
 select count(*) from dependent;
 select * from dependent;
 
---customer
+-- customer
 LOAD DATA LOCAL INFILE 'D:/DB_fillers/customer.csv' INTO TABLE customer
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
@@ -63,7 +63,7 @@ LINES TERMINATED BY '\r\n'
 select count(*) from customer;
 select * from customer;
 
---customer_project
+-- customer_project
 LOAD DATA LOCAL INFILE 'D:/DB_fillers/customer_project.csv' INTO TABLE customer_project
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
