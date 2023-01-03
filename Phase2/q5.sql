@@ -47,4 +47,8 @@ join department on s.works_for = department.dep_number
 join project on department.dep_number = project.controling_dep
 where project.proj_loc = "cehiwxhzelrcno"
 
+show global variables like 'innodb_buffer_pool_size';
+134217728
+
+set global innodb_buffer_pool_size = 1073741824
 
