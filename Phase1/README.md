@@ -7,3 +7,6 @@ ER_diagram: ER diagram
 Generate.ipynb: create csv file with data (employee)
 Generate.sql: fill employee data with csv file
 english_names.txt: to randomly creating firstname, lastname from 5000 English names
+
+Data used to fill the tables:
+- https://drive.google.com/drive/folders/1hzLoWb2D7a5oWdgmwDXrJ9sMrLwQZnkJ?usp=sharing
