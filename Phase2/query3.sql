@@ -1,13 +1,22 @@
 -- Select all info of departments that have employees with name="dummy"
         -- that control #projects > 1 
+create index employee_name using BTREE on employee(fname);
+
+select * from department 
+where dep_number in(
+    select works_for from employee use index (employee_name) where fname = "Alaina"
+)
+and dep_number in (
+    select controling_dep from project group by CONTROLING_DEP having count(*) > 1
+)
 
 create index employee_name using hash on employee(fname);
 select * from department 
 where dep_number in(
-    select works_for from employee where fname = "dummy"
+    select works_for from employee where fname = "Alaina"
 )
 and dep_number in (
-    select controlling_dep from project group by CONTROLING_DEP having count(*) > 1
+    select controling_dep from project group by CONTROLING_DEP having count(*) > 1
 )
 
 -- Select * from Department 
@@ -23,3 +32,28 @@ select * from Department join Employee on Department.DEP_NUMBER = Employee.WORKS
 (select * from Project join Department
  on Project.CONTROLING_DEP = Department.DEP_NUMBER 
  group by CONTROLING_DEP having count(*) > 1)
+
+
+--------------------------------------------------------------------------
+
+-- No index 0.047
+-- DROP INDEX employee_name ON employee;
+select * from department 
+where dep_number in(
+    select works_for from employee use index (employee_name) where fname = "Alaina"
+)
+and dep_number in (
+    select controling_dep from project group by CONTROLING_DEP having count(*) > 1
+)
+
+
+-- With index 0.015
+create index employee_name using BTREE on employee(fname);
+
+select * from department 
+where dep_number in(
+    select works_for from employee use index (employee_name) where fname = "Alaina"
+)
+and dep_number in (
+    select controling_dep from project group by CONTROLING_DEP having count(*) > 1
+)
