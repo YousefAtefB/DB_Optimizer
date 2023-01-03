@@ -1,6 +1,7 @@
 To use load in mysql:
 - https://stackoverflow.com/a/64807264/13742330
 - sql shell -> \sql (https://stackoverflow.com/a/50645498/13742330)-> https://stackoverflow.com/a/60717467/13742330
+https://stackoverflow.com/a/50422500/13742330
 
 SQL_Queries.sql: to create database tables
 ER_diagram: ER diagram
