@@ -1,6 +1,13 @@
-select distinct fname 
-from employee
-join department on employee.works_for = department.dep_number
-join project on department.dep_number = project.controling_dep
-where project.proj_loc = "cehiwxhzelrcno" and (employee.lname='Tyneshia' or salary > 10000) 
+drop PROCEDURE GetDepName;
 
+DELIMITER $$
+CREATE PROCEDURE GetDepName()
+BEGIN
+    select email 
+	from customer
+	join customer_project on customer.customer_id = customer_project.customer_id
+	join project on customer_project.project_number = project.pno
+	join department on project.controling_dep = department.dep_number
+	where department.dep_name = "mtovboufvrdnrcqkar";
+END$$
+DELIMITER ;
