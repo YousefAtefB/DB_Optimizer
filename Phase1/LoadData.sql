@@ -1,10 +1,6 @@
--- DROP INDEX employee_name2 ON employee;
-create index employee_name using BTREE on employee(fname);
+select distinct fname 
+from employee
+join department on employee.works_for = department.dep_number
+join project on department.dep_number = project.controling_dep
+where project.proj_loc = "cehiwxhzelrcno" and (employee.lname='Tyneshia' or salary > 10000) 
 
-select * from department 
-where dep_number in(
-    select works_for from employee use index (employee_name) where fname = "Alaina"
-)
-and dep_number in (
-    select controling_dep from project group by CONTROLING_DEP having count(*) > 1
-)
