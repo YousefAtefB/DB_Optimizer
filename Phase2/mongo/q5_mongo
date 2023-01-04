@@ -1,0 +1,67 @@
+// 1385 ms
+
+.explain("executionStats")
+
+db.getCollection('employee').aggregate()
+
+[
+  {
+    $lookup: {
+      from: "department",
+      localField: "WORKS_FOR",
+      foreignField: "DEP_NUMBER",
+      as: "department",
+    },
+  },
+  {
+    $unwind: {
+      path: "$department",
+      preserveNullAndEmptyArrays: false,
+    },
+  },
+  {
+    $lookup: {
+      from: "project",
+      localField: "department.DEP_NUMBER",
+      foreignField: "CONTROLING_DEP",
+      as: "project",
+    },
+  },
+  {
+    $unwind: {
+      path: "$project",
+      preserveNullAndEmptyArrays: false,
+    },
+  },
+  {
+    $match: {
+      "project.PROJ_LOC": "iqetnbxlbd",
+    },
+  },
+  {
+    $match: {
+      LName: "Abbie",
+    },
+  },
+  {
+    $match: {
+      SALARY: {
+        $gt: 10000,
+      },
+    },
+  },
+  {
+    $set: {
+      FName: "$FName",
+    },
+  },
+  {
+    /**
+     * specifications: The fields to
+     *   include or exclude.
+     */
+    $project: {
+      FName: 1,
+    },
+  },
+]
