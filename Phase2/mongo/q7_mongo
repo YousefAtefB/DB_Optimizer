@@ -1,0 +1,54 @@
+//1304 ms
+
+db.getCollection('dependent').aggregate(
+[
+    {
+      $lookup: {
+        from: "employee",
+        localField: "ESSN",
+        foreignField: "SSN",
+        as: "employee",
+      },
+    },
+    {
+      $unwind: {
+        path: "$employee",
+        preserveNullAndEmptyArrays: false,
+      },
+    },
+    {
+      $lookup: {
+        from: "department",
+        localField: "employee.WORKS_FOR",
+        foreignField: "DEP_NUMBER",
+        as: "department",
+      },
+    },
+    {
+      $unwind: {
+        path: "$department",
+        preserveNullAndEmptyArrays: false,
+      },
+    },
+    {
+      /**
+       * query: The query in MQL.
+       */
+      $match: {
+        "department.DEP_NAME": "dbbyqcifnasvbffogzyf",
+      },
+    },
+    {
+      /**
+       * specifications: The fields to
+       *   include or exclude.
+       */
+      $project: {
+        DEPENDENT_NAME: 1,
+      },
+    },
+  ]
+)
+
+//100k: dqllbxkflj
+//10k: yxxzyebpabfcmv

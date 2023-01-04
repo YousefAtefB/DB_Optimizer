@@ -1,0 +1,4 @@
+.explain("executionStats")
+
+db.getCollection('employee').aggregate()
+

@@ -2,8 +2,7 @@
 
 .explain("executionStats")
 
-db.getCollection('employee').aggregate()
-
+db.getCollection('employee').aggregate(
 [
   {
     $lookup: {
@@ -65,3 +64,4 @@ db.getCollection('employee').aggregate()
     },
   },
 ]
+)
