@@ -1,4 +1,91 @@
-.explain("executionStats")
+//162091 ms
+db.getCollection('department').aggregate(
+    [
+        {
+          /**
+           * from: The target collection.
+           * localField: The local join field.
+           * foreignField: The target join field.
+           * as: The name for the results.
+           * pipeline: Optional pipeline to run on the foreign collection.
+           * let: Optional variables to use in the pipeline field stages.
+           */
+          $lookup: {
+            from: "employee",
+            localField: "DEP_NUMBER",
+            foreignField: "WORKS_FOR",
+            as: "employee",
+          },
+        },
+        {
+          /**
+           * path: Path to the array field.
+           * includeArrayIndex: Optional name for index.
+           * preserveNullAndEmptyArrays: Optional
+           *   toggle to unwind null and empty values.
+           */
+          $unwind: {
+            path: "$employee",
+            preserveNullAndEmptyArrays: false,
+          },
+        },
+        {
+          /**
+           * query: The query in MQL.
+           */
+          $match: {
+            "employee.FName": "Delilah",
+          },
+        },
+        {
+          /**
+           * from: The target collection.
+           * localField: The local join field.
+           * foreignField: The target join field.
+           * as: The name for the results.
+           * pipeline: Optional pipeline to run on the foreign collection.
+           * let: Optional variables to use in the pipeline field stages.
+           */
+          $lookup: {
+            from: "project",
+            localField: "DEP_NUMBER",
+            foreignField: "CONTROLING_DEP",
+            as: "project",
+          },
+        },
+        {
+          /**
+           * path: Path to the array field.
+           * includeArrayIndex: Optional name for index.
+           * preserveNullAndEmptyArrays: Optional
+           *   toggle to unwind null and empty values.
+           */
+          $unwind: {
+            path: "$project",
+            preserveNullAndEmptyArrays: false,
+          },
+        },
+        {
+          /**
+           * _id: The id of the group.
+           * fieldN: The first field name.
+           */
+          $group: {
+            _id: "$project.CONTROLING_DEP",
+            count: {
+              $sum: 1,
+            },
+          },
+        },
+        {
+          /**
+           * query: The query in MQL.
+           */
+          $match: {
+            count: { $gt: 1 },
+          },
+        },
+      ]
+).explain("executionStats")
 
-db.getCollection('employee').aggregate()
 
